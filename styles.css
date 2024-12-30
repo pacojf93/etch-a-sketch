@@ -1,0 +1,33 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    background-color: black;
+    color: white;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    width: 100vh;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#container > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: solid white 2px;
+}
+
+.active {
+    background-color: red;
+}
