@@ -1,39 +1,74 @@
 
-let squaresPerSide = 4
+const DEFAULT_SQUARES_PER_SIDE = 4
 
 const container = document.querySelector("#container")
 const newButton = document.querySelector("#new-button")
 
-let squareSize = parseInt(container.offsetWidth / squaresPerSide)
+let squareArray = []
 
-for(let i = 0; i < squaresPerSide * squaresPerSide; i ++){
-    const square = document.createElement("div")
-    square.id = i
+function createGrid(squaresPerSide) {
 
-    /* 
-        offsetWidth property is read-only, so we ha to use width and heigt sltyling for dimensions
-    */
-    square.style.width = `${squareSize}px`
-    square.style.height = `${squareSize}px`
+    let squareSize = parseInt(container.offsetWidth / squaresPerSide)
 
-    /*  
-        setting opacity in style sheet was not functional
-    */
-    square.style.opacity = 1
-
-    /*
-        "this" is not available inside arrow functions
-    */
-    square.addEventListener("mouseover", function() {
-        this.classList.add("active")
-        if(square.style.opacity > 0) {
-            square.style.opacity -= 0.1
-        }
-    })
-
-    container.appendChild(square)
+    for(let i = 0; i < squaresPerSide * squaresPerSide; i ++){
+        const square = document.createElement("div")
+        square.id = i
+    
+        /* 
+            offsetWidth property is read-only, so we ha to use width and heigt sltyling for dimensions
+        */
+        square.style.width = `${squareSize}px`
+        square.style.height = `${squareSize}px`
+    
+        /*  
+            setting opacity in style sheet was not functional
+        */
+        square.style.opacity = 1
+        squareArray.push(square)
+        container.appendChild(square)
+    }
+    
 }
 
-newButton.addEventListener("click", () => {
-    prompt("Set the new grid dimension:")
+function deleteGrid() {
+    squareArray.forEach((square) => {
+        square.remove()
+    })
+}
+
+/* events */
+
+window.addEventListener("load", () => {
+    createGrid(DEFAULT_SQUARES_PER_SIDE)
 })
+
+newButton.addEventListener("click", () => {    
+
+    let newGridSquaresPerSide = prompt("Set the new grid dimension (max 100 square per side):")
+
+    if(isFinite(newGridSquaresPerSide) && newGridSquaresPerSide > 0) {
+        if(newGridSquaresPerSide > 100) {
+            newGridSquaresPerSide = 100
+        }
+        deleteGrid()
+        createGrid(newGridSquaresPerSide)           
+    } else alert("not a valid value")
+
+})
+
+container.addEventListener("mouseover", (event) => {
+    const id = event.target.id
+    const square = squareArray[id]
+    square.classList.add("active")
+    if(square.style.opacity > 0) {
+        square.style.opacity -= 0.1
+    }
+})
+
+/*
+    - how to delete elements from DOM   DONE
+    - page opening event
+    - custom event and event retrieve
+
+*/
+
