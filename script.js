@@ -2,6 +2,7 @@
 let squaresPerSide = 4
 
 const container = document.querySelector("#container")
+const newButton = document.querySelector("#new-button")
 
 let squareSize = parseInt(container.offsetWidth / squaresPerSide)
 
@@ -32,3 +33,7 @@ for(let i = 0; i < squaresPerSide * squaresPerSide; i ++){
 
     container.appendChild(square)
 }
+
+newButton.addEventListener("click", () => {
+    prompt("Set the new grid dimension:")
+})
