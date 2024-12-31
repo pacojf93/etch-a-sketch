@@ -35,14 +35,27 @@ body {
     box-sizing: border-box; /* easier to fit */
 }
 
+#footer {
+    width: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* color and shape styling */
 
-body {
+body,
+.inactive {
     background-color: black;
 }
 
 #container > div {
-    border: solid white 2px;
+    border: solid beige 2px;
+   
+}
+
+.active {
+    background-color: beige;
 }
 
 #container > div,
@@ -50,18 +63,25 @@ body {
     border-radius: 16px;
 }
 
-.active {
-    background-color: beige;
-}
-
 /* font styling */
 
-h1 {
-    color: white;
+h1,
+#footer {
+    color: beige;
 }
 
 h1,
-#new-button {
+#new-button,
+#footer {
     font-family: 'Courier New', Courier, monospace;
+}
+
+h1,
+#new-button {    
     font-size: 64px;
+}
+
+#footer {
+    font-size: 32px;
+    text-align: center;
 }

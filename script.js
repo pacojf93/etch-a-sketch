@@ -24,6 +24,25 @@ function createGrid(squaresPerSide) {
             setting opacity in style sheet was not functional
         */
         square.style.opacity = 1
+
+        square.addEventListener("mouseover", function(event) {
+            if(event.altKey) {
+                square.classList.add("inactive")
+                square.classList.remove("active")
+                square.style.opacity = 1
+            }
+            else if(square.classList.contains("active")) {
+                if(square.style.opacity > 0) {
+                    square.style.opacity -= 0.1
+                }
+            } 
+            else {
+                square.classList.remove("inactive")
+                square.classList.add("active")
+            }            
+            
+        })
+
         squareArray.push(square)
         container.appendChild(square)
     }
@@ -55,20 +74,3 @@ newButton.addEventListener("click", () => {
     } else alert("not a valid value")
 
 })
-
-container.addEventListener("mouseover", (event) => {
-    const id = event.target.id
-    const square = squareArray[id]
-    square.classList.add("active")
-    if(square.style.opacity > 0) {
-        square.style.opacity -= 0.1
-    }
-})
-
-/*
-    - how to delete elements from DOM   DONE
-    - page opening event
-    - custom event and event retrieve
-
-*/
-
